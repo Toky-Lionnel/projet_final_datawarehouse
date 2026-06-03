@@ -55,7 +55,7 @@ x-airflow-common:
     - ${ENV_FILE_PATH:-.env}
   environment:
     &airflow-common-env
-    AIRFLOW__CORE__EXECUTOR: CeleryExecutor
+    AIRFLOW__CORE__EXECUTOR: SequentialExecutor
     AIRFLOW__CORE__AUTH_MANAGER: airflow.providers.fab.auth_manager.fab_auth_manager.FabAuthManager
     AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: postgresql+psycopg2://airflow:airflow@postgres/airflow
     AIRFLOW__CELERY__RESULT_BACKEND: db+postgresql+psycopg2://airflow:airflow@postgres/airflow
@@ -333,5 +333,34 @@ services:
       airflow-init:
         condition: service_completed_successfully
 
+  mysql-us:
+    image: mysql:8
+    container_name: mysql-datawarehouse
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: worldtrade_us
+    ports:
+    - "3307:3306"
+    volumes:
+      - ./init/mysql:/docker-entrypoint-initdb.d
+      - mysql_datawarehouse:/var/lib/mysql
+  
+  postgres-datawarehouse:
+    image: postgres:16
+    container_name: postgres-datawarehouse
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: postgres
+    ports:
+    - "5434:5432"
+    volumes:
+      - ./init/postgres:/docker-entrypoint-initdb.d
+      - postgres-datawarehouse-volume:/var/lib/postgresql-datawarehouse/data
+
 volumes:
   postgres-db-volume:
+  postgres-datawarehouse-volume:
+  mysql_datawarehouse:

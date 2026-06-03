@@ -1,19 +1,19 @@
--- CREATE DATABASE worldtrade_asia;
+CREATE DATABASE worldtrade_asia;
 \c worldtrade_asia;
 
 CREATE TABLE customers (
     customer_id SERIAL PRIMARY KEY,
-    first_name VARCHAR(50) NOT NULL,
-    last_name VARCHAR(50) NOT NULL,
-    email VARCHAR(100) UNIQUE NOT NULL,
-    country VARCHAR(50) NOT NULL,
+    first_name VARCHAR(50),
+    last_name VARCHAR(50),
+    email VARCHAR(100) UNIQUE,
+    country VARCHAR(50),
     city VARCHAR(50),
     registration_date DATE DEFAULT CURRENT_DATE
 );
 
 CREATE TABLE products (
     product_id SERIAL PRIMARY KEY,
-    product_name VARCHAR(100) NOT NULL,
+    product_name VARCHAR(100),
     category VARCHAR(50),
     unit_price_usd DECIMAL(10,2),
     supplier_id INTEGER
@@ -21,7 +21,7 @@ CREATE TABLE products (
 
 CREATE TABLE suppliers (
     supplier_id SERIAL PRIMARY KEY,
-    supplier_name VARCHAR(100) NOT NULL,
+    supplier_name VARCHAR(100),
     country VARCHAR(50),
     contact_email VARCHAR(100)
 );
@@ -30,9 +30,9 @@ CREATE TABLE orders (
     order_id SERIAL PRIMARY KEY,
     customer_id INTEGER REFERENCES customers(customer_id),
     product_id INTEGER REFERENCES products(product_id),
-    order_date DATE NOT NULL,
-    quantity INTEGER NOT NULL,
-    unit_price_usd DECIMAL(10,2) NOT NULL,
+    order_date DATE,
+    quantity INTEGER,
+    unit_price_usd DECIMAL(10,2),
     total_amount_usd DECIMAL(10,2) GENERATED ALWAYS AS (quantity * unit_price_usd) STORED,
     currency VARCHAR(3) DEFAULT 'JPY',
     status VARCHAR(20) DEFAULT 'completed'
@@ -41,7 +41,7 @@ CREATE TABLE orders (
 CREATE TABLE shipments (
     shipment_id SERIAL PRIMARY KEY,
     order_id INTEGER UNIQUE REFERENCES orders(order_id),
-    shipment_date DATE NOT NULL,
+    shipment_date DATE,
     carrier VARCHAR(50),
     tracking_number VARCHAR(100),
     estimated_delivery DATE,
@@ -51,7 +51,7 @@ CREATE TABLE shipments (
 CREATE TABLE payments (
     payment_id SERIAL PRIMARY KEY,
     order_id INTEGER UNIQUE REFERENCES orders(order_id),
-    payment_date DATE NOT NULL,
+    payment_date DATE,
     amount_usd DECIMAL(10,2),
     method VARCHAR(30),
     status VARCHAR(20)
