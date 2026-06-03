@@ -1,0 +1,21 @@
+supplier_id,supplier_name,country,contact_email,phone,payment_terms,annual_volume_usd
+SUP001,Fromages de France,France,contact@fromages.fr,+33 1 23 45 67 89,Net 30,450000
+SUP002,Bayerische Brauerei,Germany,info@bayern-brau.de,+49 89 1234567,Net 15,780000
+SUP003,Pasta Italia SRL,Italy,sales@pastaitalia.it,+39 06 123456,Net 45,320000
+SUP004,Iberico Ham Suppliers,Spain,ham@iberico.es,+34 91 1234567,Net 30,890000
+SUP005,Tea & Biscuits UK,United Kingdom,hello@teabiscuits.co.uk,+44 20 7946 0123,Net 60,210000
+SUP006,Vins de Bourgogne,France,vins@bourgogne.fr,+33 3 80 123456,Net 30,670000
+SUP007,TechParts USA,USA,sales@techparts.com,+1 800 555 0199,Net 15,2500000
+SUP008,Midwest Foods,USA,info@midwestfoods.com,+1 312 555 0147,Net 30,980000
+SUP009,Sony Electronics,Japan,supply@sony.co.jp,+81 3 6748 2111,Net 45,8900000
+SUP010,Alibaba Group,China,sourcing@alibaba.com,+86 571 8502 2088,Net 60,12000000
+SUP011,Tata Industries,India,procurement@tata.in,+91 22 6665 8282,Net 30,3500000
+SUP012,Samsung Global,South Korea,partner@samsung.com,+82 2 2255 0114,Net 45,7200000
+SUP013,VinGroup,Vietnam,supply@vingroup.vn,+84 24 3936 6080,Net 30,640000
+SUP014,Petronas Chemicals,Malaysia,trade@petronas.com.my,+60 3 2331 8822,Net 60,1100000
+SUP015,Toyota Auto Parts,Japan,parts@toyota.jp,+81 3 3817 7111,Net 30,5600000
+SUP016,Huawei Tech,China,buy@huawei.com,+86 755 2878 0888,Net 45,9800000
+SUP017,Infosys Services,India,services@infosys.com,+91 80 2852 0261,Net 30,2100000
+SUP018,LG Electronics,South Korea,supply@lg.com,+82 2 2033 1114,Net 45,4300000
+SUP019,California Wines,USA,wines@calwines.com,+1 707 555 0198,Net 30,340000
+SUP020,Fashion Forward,USA,contact@fashionfwd.com,+1 213 555 0176,Net 15,560000
