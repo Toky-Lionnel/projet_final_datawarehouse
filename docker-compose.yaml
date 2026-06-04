@@ -360,6 +360,13 @@ services:
       - ./init/postgres:/docker-entrypoint-initdb.d
       - postgres-datawarehouse-volume:/var/lib/postgresql-datawarehouse/data
 
+  node-api:
+    build: ./node-api
+    container_name: node-api
+    restart: always
+    ports:
+    - "3000:3000"
+
 volumes:
   postgres-db-volume:
   postgres-datawarehouse-volume:
