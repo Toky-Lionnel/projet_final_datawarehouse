@@ -17,6 +17,10 @@ from staging.transformations.product_transformer import (
     transform_products
 )
 
+from staging.transformations.order_transformer import (
+    transform_orders
+)
+
 with DAG(
     dag_id="staging_pipeline",
     start_date=datetime(2026, 1, 1),
@@ -39,4 +43,9 @@ with DAG(
         python_callable=transform_products
     )
 
-    customers_task >> products_task >> suppliers_task
+    orders_task = PythonOperator(
+        task_id="transform_orders",
+        python_callable=transform_orders
+    )
+
+    customers_task >> products_task >> suppliers_task >> orders_task
