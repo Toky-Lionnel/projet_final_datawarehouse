@@ -1,6 +1,7 @@
 import time
 
 from sqlalchemy import text
+from sqlalchemy import inspect
 
 from ingestion.logging.audit_logger import (
     log_pipeline_event
@@ -18,19 +19,44 @@ def load_to_raw_schema(
 
     start_time = time.time()
 
+    full_table_name = f"{schema}.{table_name}"
+
     try:
 
+        inspector = inspect(engine)
+
+        table_exists = inspector.has_table(
+            table_name,
+            schema=schema
+        )
+
         # ---------------------------------------------------
-        # TRUNCATE TABLE
+        # TABLE EXISTS
         # ---------------------------------------------------
 
-        with engine.begin() as connection:
+        if table_exists:
 
-            truncate_query = text(
-                f"TRUNCATE TABLE {schema}.{table_name} RESTART IDENTITY"
-            )
+            with engine.begin() as connection:
 
-            connection.execute(truncate_query)
+                truncate_query = text(
+                    f"""
+                    TRUNCATE TABLE
+                    {full_table_name}
+                    RESTART IDENTITY
+                    """
+                )
+
+                connection.execute(truncate_query)
+
+            print(f"Truncated {full_table_name}")
+
+        # ---------------------------------------------------
+        # TABLE DOES NOT EXIST
+        # ---------------------------------------------------
+
+        else:
+
+            print(f"Creating table {full_table_name}")
 
         # ---------------------------------------------------
         # INSERT DATA
@@ -64,7 +90,7 @@ def load_to_raw_schema(
         )
 
         print(
-            f"Loaded {schema}.{table_name} "
+            f"Loaded {full_table_name} "
             f"({len(dataframe)} rows)"
         )
 
@@ -90,7 +116,7 @@ def load_to_raw_schema(
         )
 
         print(
-            f"Error loading {schema}.{table_name}: {error}"
+            f"Error loading {full_table_name}: {error}"
         )
 
         raise error

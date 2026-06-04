@@ -15,6 +15,18 @@ from ingestion.notifications.mail_sender import (
     send_pipeline_email
 )
 
+from ingestion.extractors.api_extractor import (
+    extract_api_data
+)
+
+from ingestion.extractors.csv_extractor import (
+    extract_csv_data
+)
+
+from ingestion.extractors.excel_extractor import (
+    extract_excel_data
+)
+
 default_args = {
     "owner": "worldtrade",
     "depends_on_past": False,
@@ -46,6 +58,21 @@ with DAG(
         python_callable=extract_asia_data
     )
 
+    extract_api_task = PythonOperator(
+        task_id="extract_api_data",
+        python_callable=extract_api_data
+    )
+
+    extract_csv_task = PythonOperator(
+        task_id="extract_csv_data",
+        python_callable=extract_csv_data
+    )
+
+    extract_excel_task = PythonOperator(
+        task_id="extract_excel_data",
+        python_callable=extract_excel_data
+    )
+
     send_email_task = PythonOperator(
         task_id="send_pipeline_email",
         python_callable=send_pipeline_email
@@ -54,5 +81,8 @@ with DAG(
     [
         extract_eu_task,
         extract_us_task,
-        extract_asia_task
+        extract_asia_task,
+        extract_api_task,
+        extract_csv_task,
+        extract_excel_task
     ] >> send_email_task

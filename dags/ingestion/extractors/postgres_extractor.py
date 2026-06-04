@@ -1,7 +1,7 @@
 import pandas as pd
 from sqlalchemy import create_engine
 
-from ingestion.extractors.loader import load_to_raw_schema
+from ingestion.loaders.loader import load_to_raw_schema
 
 SOURCE_TABLES = [
     "customers",
