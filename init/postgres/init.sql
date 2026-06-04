@@ -373,3 +373,17 @@ CREATE DATABASE worldtrade_dw;
 CREATE SCHEMA raw;
 CREATE SCHEMA staging;
 CREATE SCHEMA mart;
+
+CREATE SCHEMA IF NOT EXISTS audit;
+
+CREATE TABLE IF NOT EXISTS audit.pipeline_logs (
+    id SERIAL PRIMARY KEY,
+    pipeline_name VARCHAR(255),
+    source_name VARCHAR(255),
+    table_name VARCHAR(255),
+    rows_loaded INTEGER,
+    status VARCHAR(50),
+    message TEXT,
+    execution_time_seconds NUMERIC,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);

@@ -33,5 +33,6 @@ def extract_us_data():
             dataframe=df,
             table_name=f"us_{table}",
             schema=DW_SCHEMA,
-            engine=dw_engine
+            engine=dw_engine,
+            source_name="US Database"
         )

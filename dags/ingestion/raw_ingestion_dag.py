@@ -11,6 +11,10 @@ from ingestion.extractors.mysql_extractor import (
     extract_us_data
 )
 
+from ingestion.notifications.mail_sender import (
+    send_pipeline_email
+)
+
 default_args = {
     "owner": "worldtrade",
     "depends_on_past": False,
@@ -42,8 +46,13 @@ with DAG(
         python_callable=extract_asia_data
     )
 
+    send_email_task = PythonOperator(
+        task_id="send_pipeline_email",
+        python_callable=send_pipeline_email
+    )
+
     [
         extract_eu_task,
         extract_us_task,
         extract_asia_task
-    ]
+    ] >> send_email_task

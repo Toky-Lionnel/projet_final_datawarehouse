@@ -33,7 +33,8 @@ def extract_eu_data():
             dataframe=df,
             table_name=f"eu_{table}",
             schema=DW_SCHEMA,
-            engine=dw_engine
+            engine=dw_engine,
+            source_name="EU Database"
         )
 
 
@@ -57,5 +58,6 @@ def extract_asia_data():
             dataframe=df,
             table_name=f"asia_{table}",
             schema=DW_SCHEMA,
-            engine=dw_engine
+            engine=dw_engine,
+            source_name="Asia Database"
         )
