@@ -7,7 +7,9 @@ SOURCE_TABLES = [
     "customers",
     "orders",
     "products",
-    "shipments"
+    "shipments",
+    "suppliers",
+    "payments"
 ]
 
 DW_SCHEMA = "raw"
