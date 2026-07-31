@@ -135,6 +135,12 @@ INSERT INTO orders (customer_id, product_id, order_date, quantity, unit_price_us
 (19, 19, '2026-08-22', 3, 99.99, 'JPY', 'completed'),
 (20, 20, '2026-09-01', 1, 149.99, 'CNY', 'completed');
 
+INSERT INTO orders (customer_id, product_id, order_date, quantity, unit_price_usd, currency, status) VALUES
+(1, '2026-01-15', 1, 599.99, 'JPY', 'completed'),
+(2, '2026-01-20', 3, 49.99, 'CNY', 'completed')';'
+
+
+
 INSERT INTO shipments (order_id, shipment_date, carrier, tracking_number, estimated_delivery, status) VALUES
 (1, '2026-01-16', 'Yamato', 'JP1234567890', '2026-01-20', 'delivered'),
 (2, '2026-01-21', 'SF Express', 'CN9876543210', '2026-01-25', 'delivered'),
